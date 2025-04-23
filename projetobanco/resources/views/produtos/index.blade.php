@@ -22,6 +22,7 @@
                 <th>ID</th>
                 <th>Nome do Produto</th>
                 <th>Nome da Categoria</th>
+                <th>Foto do Produto</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                     <td> {{ $p->id }}</td>
                     <td> {{ $p->nome }}</td>
                     <td> {{ $p->categoria->nome }}</td>
+                    <td> <img src="{{ asset('storage/'.$p->foto) }}" height="50"/> </td>
                     <td>
                         <a href="/produtos/{{ $p->id }}/edit" class="btn btn-warning">Editar</a>
                         <a href="/produtos/{{ $p->id }}" class="btn btn-info">Consultar</a>
