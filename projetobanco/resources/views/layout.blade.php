@@ -22,12 +22,16 @@
       <!-- Itens da navbar -->
       <div class="collapse navbar-collapse" id="navbarConteudo">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Início</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sobre</a>
-          </li>
+          @if (Auth::user()->role == "ADM")
+            <li class="nav-item">
+              <a class="nav-link" href="/produtos">Produtos</a>
+            </li>
+          @endif
+          @if (Auth::user()->role== "CLI")
+            <li class="nav-item">
+              <a class="nav-link" href="/carrinho">Carrinho</a>
+            </li>
+          @endif
           <li class="nav-item">
             <a class="nav-link" href="/editar">Alterar meus dados</a>
           </li>
