@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Middleware\RoleAdmMiddleware;
 use App\Http\Middleware\RoleCliMiddleware;
@@ -43,6 +44,7 @@ Route::middleware("auth")->group(function (){
         Route::get('/home-cli', function() {
             return view("home-cli");
         });
+        Route::get('/carrinho/add/{id}', [CarrinhoController::class, 'add']);
     });
     
 });

@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $p->nome }}</h5>
                             <p class="card-text">{{ $p->descricao }}</p>
-                            <a href="#" class="btn btn-primary">Comprar</a>
+                            <a href="/carrinho/add/{{ $p->id }}" class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
                 </div>
