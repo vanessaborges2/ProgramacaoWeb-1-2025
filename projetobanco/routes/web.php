@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\HomeCliController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Middleware\RoleAdmMiddleware;
 use App\Http\Middleware\RoleCliMiddleware;
@@ -41,10 +42,10 @@ Route::middleware("auth")->group(function (){
     });
 
     Route::middleware([RoleCliMiddleware::class])->group(function (){ 
-        Route::get('/home-cli', function() {
-            return view("home-cli");
-        });
+        Route::get('/home-cli', [HomeCliController::class, 'index']);
         Route::get('/carrinho/add/{id}', [CarrinhoController::class, 'add']);
+        Route::get('/carrinho/remove/{id}', [CarrinhoController::class, 'remove']);
+        Route::get('/carrinho/fechar', [CarrinhoController::class, 'fechar']);
     });
     
 });

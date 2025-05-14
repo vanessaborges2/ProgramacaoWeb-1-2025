@@ -46,4 +46,35 @@ class CarrinhoController extends Controller
 
     }
 
+    public function remove($id){
+        $pedido = Pedido::where('user_id', Auth::id())
+            ->where('status', 'aberto')
+            ->first();
+        $item = ItensPedido::where('pedido_id', $pedido->id)
+            ->where('produto_id', $id)
+            ->first();
+        if ($item){
+            if ($item->quantidade == 1)
+                $item->delete();
+            else {
+                $item->quantidade -= 1;
+                $item->save();
+            }
+                
+            $pedido->total = ItensPedido::where('pedido_id', $pedido->id)
+                ->sum(DB::raw("quantidade * preco"));
+                $pedido->save();
+        }
+        return redirect('home-cli');
+    }
+
+    public function fechar(){
+        $pedido = Pedido::where('user_id', Auth::id())
+            ->where('status', 'aberto')
+            ->first();
+        $pedido->status = 'fechado';
+        $pedido->save();
+        return redirect('home-cli');
+    }
+
 }
