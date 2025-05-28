@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\HomeAdmController;
 use App\Http\Controllers\HomeCliController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Middleware\RoleAdmMiddleware;
@@ -36,9 +37,8 @@ Route::middleware("auth")->group(function (){
 
     Route::middleware([RoleAdmMiddleware::class])->group(function (){ 
         Route::resource("produtos", ProdutoController::class);
-        Route::get('/home-adm', function() {
-            return view("home-adm");
-        });
+        Route::get('/home-adm', [HomeAdmController::class, 'index']);
+        Route::get('/relatorio', [HomeAdmController::class, 'gerarRelatorio']);
     });
 
     Route::middleware([RoleCliMiddleware::class])->group(function (){ 
